@@ -476,7 +476,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
             ((MBRoundProgressView *)indicator).progressTintColor = color;
         }
         if (appearance.backgroundTintColor == nil) {
-            ((MBRoundProgressView *)indicator).backgroundTintColor = [color colorWithAlphaComponent:0.1];
+            ((MBRoundProgressView *)indicator).backgroundTintColor = [color colorWithAlphaComponent:0.1f];
         }
     } else if ([indicator isKindOfClass:[MBBarProgressView class]]) {
         MBBarProgressView *appearance = nil;
@@ -1050,7 +1050,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
         CGContextAddLineToPoint(context, rect.size.width - radius - 4, 4);
         CGFloat angle = -acos(x/radius);
         if (isnan(angle)) angle = 0;
-        CGContextAddArc(context, rect.size.width - radius - 4, rect.size.height/2, radius, M_PI, angle, 0);
+        CGContextAddArc(context, rect.size.width - radius - 4, rect.size.height/2, radius, (CGFloat)M_PI, angle, 0);
         CGContextAddLineToPoint(context, amount, rect.size.height/2);
 
         CGContextMoveToPoint(context, 4, rect.size.height/2);
@@ -1058,7 +1058,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
         CGContextAddLineToPoint(context, rect.size.width - radius - 4, rect.size.height - 4);
         angle = acos(x/radius);
         if (isnan(angle)) angle = 0;
-        CGContextAddArc(context, rect.size.width - radius - 4, rect.size.height/2, radius, -M_PI, angle, 1);
+        CGContextAddArc(context, rect.size.width - radius - 4, rect.size.height/2, radius, (CGFloat)-M_PI, angle, 1);
         CGContextAddLineToPoint(context, amount, rect.size.height/2);
         
         CGContextFillPath(context);
@@ -1111,7 +1111,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
             }
         } else {
             _style = MBProgressHUDBackgroundStyleSolidColor;
-            _color = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+            _color = [[UIColor blackColor] colorWithAlphaComponent:0.8f];
         }
 
         self.clipsToBounds = YES;
