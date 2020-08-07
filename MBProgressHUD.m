@@ -741,8 +741,12 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
 
 #pragma mark - Notifications
 
+//#if !TARGET_OS_TV && !TARGET_OS_MACCATALYST
+//#define SUPPORT_UI_ORIENTATION_CHANGE
+//#endif
+
 - (void)registerForNotifications {
-#if !TARGET_OS_TV && !TARGET_OS_MACCATALYST
+#ifdef SUPPORT_UI_ORIENTATION_CHANGE
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 
     [nc addObserver:self selector:@selector(statusBarOrientationDidChange:)
@@ -751,13 +755,13 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
 }
 
 - (void)unregisterFromNotifications {
-#if !TARGET_OS_TV && !TARGET_OS_MACCATALYST
+#ifdef SUPPORT_UI_ORIENTATION_CHANGE
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 #endif
 }
 
-#if !TARGET_OS_TV && !TARGET_OS_MACCATALYST
+#ifdef SUPPORT_UI_ORIENTATION_CHANGE
 - (void)statusBarOrientationDidChange:(NSNotification *)notification {
     UIView *superview = self.superview;
     if (!superview) {
